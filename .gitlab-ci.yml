@@ -1,4 +1,6 @@
 test_runner:
+  tags:
+  - ezops
   script:
   - echo "Teste"
   only:

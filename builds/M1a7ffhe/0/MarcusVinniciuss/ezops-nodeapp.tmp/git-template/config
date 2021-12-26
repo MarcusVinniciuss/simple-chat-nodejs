@@ -1,0 +1,6 @@
+[init]
+	defaultBranch = none
+[fetch]
+	recurseSubmodules = false
+[http "https://gitlab.com"]
+	sslCAInfo = /home/vinnicus/Documents/www/docker-simple-chat/builds/M1a7ffhe/0/MarcusVinniciuss/ezops-nodeapp.tmp/CI_SERVER_TLS_CA_FILE
