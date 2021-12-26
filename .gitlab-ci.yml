@@ -1,0 +1,5 @@
+test_runner:
+  script:
+  - echo "Teste"
+  only:
+  - master
