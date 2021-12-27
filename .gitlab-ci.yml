@@ -1,7 +1,16 @@
-test_runner:
-  tags:
-  - ezops
+image: docker:latest
+services:
+  - docker:dind
+
+stages: 
+  - test
+  - deploy
+
+
+deploy_production:
+  stage: - test
+  tags: - ezops
   script:
-  - echo "Teste"
+  - pwd
   only:
   - master
