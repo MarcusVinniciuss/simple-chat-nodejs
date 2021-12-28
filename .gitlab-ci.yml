@@ -4,20 +4,20 @@ stages:
 - build
 - deploy
 
-build-docker:
-  tags: 
-   - docker-runner
-  services:
-  - docker:dind
-
-  before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
-  
-  stage: build
-  script:
-  - docker build -t sendmessages . 
-  - docker tag sendmessages $CI_REGISTRY_USER/sendmessages:latest
-  - docker push mvinnicius1312/sendmessages:latest
+#build-docker:
+#  tags: 
+#   - docker-runner
+#  services:
+#  - docker:dind
+#
+#  before_script:
+#  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+#  
+#  stage: build
+#  script:
+#  - docker build -t sendmessages . 
+#  - docker tag sendmessages $CI_REGISTRY_USER/sendmessages:latest
+#  - docker push mvinnicius1312/sendmessages:latest
 
 deploy-app:
   stage: deploy
@@ -26,6 +26,6 @@ deploy-app:
     - echo -e "$STAGING_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - '[[ -f /.dockerenv ]] && echo -e "Host *ntStrictHostKeyChecking nonn" > ~/.ssh/config'
-    - ssh -p22 ec2-user@$PROD_DEPLOY_IP "ls -la"
+    - ssh -p22 ec2-user@$PROD_DEPLOY_IP
   only:
     - master
