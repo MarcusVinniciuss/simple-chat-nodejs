@@ -12,5 +12,7 @@ build-docker:
   - docker info
 
   stage: build
+  tags: 
+    - docker-runner
   script:
   - echo "Teste"
