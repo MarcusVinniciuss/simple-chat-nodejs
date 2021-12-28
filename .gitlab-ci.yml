@@ -26,7 +26,7 @@ deploy-app:
   script:
     #- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
-    - ssh-add <(echo "$STAGING_PRIVATE_KEY" | base64 --decode)
+    - echo "${STAGING_PRIVATE_KEY}" |  tr -d ' ' | base64 --decode | ssh-add -
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - ssh -p22 ubuntu@175.31.15.183 "pwd"
