@@ -18,19 +18,12 @@ build-docker:
   - docker push mvinnicius1312/sendmessages:latest
 
 deploy-app:
+  stage: deploy
   before_script:
     - 'which ssh-agent || ( apt-get install -qq openssh-client )'
     - eval $(ssh-agent -s)
     - ssh-add <(echo "$SSH_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  stage: deploy
-  deploy_staging:
-    type: deploy
-    environment:
-      name: staging
-      url: example.com
-    script:
-      - ssh ec2-user@172.31.14.1 "ls -la"
-    only:
-      - master
+  script:
+    - ssh ec2-user@172.31.14.1 "ls -la"
