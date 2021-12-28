@@ -1,16 +1,16 @@
 image: docker:latest
-services:
-  - docker:dind
 
-stages: 
-  - test
-  - deploy
+stages:
+- build
+- deploy
 
+build-docker:
+  services:
+  - docker:latest
 
-deploy_production:
-  stage: - test
-  tags: - ezops
+  before_script:
+  - docker info
+
+  stage: build
   script:
-  - pwd
-  only:
-  - master
+  - echo "Teste"
