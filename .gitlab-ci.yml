@@ -12,9 +12,9 @@ build-docker:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
 
   script:
-  - docker build -t sendmessages . 
+  #- docker build -t sendmessages . 
   - docker tag sendmessages mvinnicius1312/sendmessages:latest
-  - docker push mvinnicius1312/sendmessages:latest
+  #- docker push mvinnicius1312/sendmessages:latest
 
   stage: build
   tags: 
