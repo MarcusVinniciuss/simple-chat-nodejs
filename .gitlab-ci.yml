@@ -26,7 +26,7 @@ deploy-app:
     - echo -e "$STAGING_SSH_KEY" > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
     - '[[ -f /.dockerenv ]] && echo -e "Host *ntStrictHostKeyChecking nonn" > ~/.ssh/config'
-    - ssh -p22 ec2-user@172.31.14.1 "ls -la"
+    - ssh -p22 ubuntu@175.31.15.183 "ls -la"
 
   only:
     - master
