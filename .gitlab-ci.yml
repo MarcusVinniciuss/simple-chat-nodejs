@@ -9,7 +9,7 @@ build-docker:
   - docker:dind
 
   before_script:
-  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD --password-stdin
 
   script:
   - docker build -t sendmessages . 
@@ -20,4 +20,4 @@ build-docker:
   tags: 
     - docker-runner
   script:
-  - echo "Build criada"
+  - docker images
