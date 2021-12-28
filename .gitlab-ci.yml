@@ -29,7 +29,7 @@ deploy-app:
     - ssh-add <(echo "$STAGING_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - ssh -p22 ubuntu@175.31.15.183 "ls -la"
+    - ssh -p22 ubuntu@175.31.15.183 "pwd"
 
   only:
     - master
