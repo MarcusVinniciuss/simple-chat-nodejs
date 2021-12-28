@@ -18,6 +18,7 @@ build-docker:
   - docker push mvinnicius1312/sendmessages:latest
 
 deploy-app:
+    stage: deploy
     dependencies:
     - build-docker
     script:
