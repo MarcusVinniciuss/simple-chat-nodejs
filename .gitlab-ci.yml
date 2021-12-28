@@ -21,6 +21,8 @@ stages:
 
 deploy-app:
   stage: deploy
+  tags:
+    - ezops
   script:
     #- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
