@@ -22,10 +22,10 @@ stages:
 deploy-app:
   stage: deploy
   script:
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$STAGING_PRIVATE_KEY")
     - mkdir -p ~/.ssh
-    - echo -e "$STAGING_SSH_KEY" > ~/.ssh/id_rsa
-    - chmod 600 ~/.ssh/id_rsa
-    - '[[ -f /.dockerenv ]] && echo -e "Host *ntStrictHostKeyChecking nonn" > ~/.ssh/config'
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
     - ssh -p22 ubuntu@175.31.15.183 "ls -la"
 
   only:
