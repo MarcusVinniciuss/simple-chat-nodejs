@@ -30,7 +30,8 @@ deploy-app:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
     #- '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-    - ssh -p22 ubuntu@175.31.15.183 "pwd"
+    #- ssh -p22 ubuntu@175.31.15.183 "pwd"
+    - ssh ubuntu@175.31.15.183 "pwd"
 
   only:
     - master
