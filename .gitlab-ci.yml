@@ -21,11 +21,11 @@ build-docker:
 
 deploy-app:
   stage: deploy
-  before_script:
-    - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  script:
     - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - ssh-add <(echo "$STAGING_PRIVATE_KEY")
     - mkdir -p ~/.ssh
     - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
-  script:
-    - ssh ec2-user@172.31.14.1 "ls -la"
+    - ssh -p22 ec2-user@$PROD_DEPLOY_IP "ls -la"
+  only:
+    - master
