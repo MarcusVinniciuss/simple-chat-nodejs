@@ -9,7 +9,7 @@ build-docker:
   - docker:latest
 
   before_script:
-  - docker info
+  - docker build -t sendmessages . 
 
   stage: build
   tags: 
