@@ -5,6 +5,8 @@ stages:
 - deploy
 
 build-docker:
+  tags: 
+   - docker-runner
   services:
   - docker:dind
 
