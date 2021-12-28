@@ -13,8 +13,8 @@ build-docker:
   
   stage: build
   script:
-  #- docker build -t sendmessages . 
-  - docker tag sendmessages mvinnicius1312/sendmessages:latest
+  - docker build -t sendmessages . 
+  - docker tag sendmessages $CI_REGISTRY_USER/sendmessages:latest
   #- docker push mvinnicius1312/sendmessages:latest
 
   
