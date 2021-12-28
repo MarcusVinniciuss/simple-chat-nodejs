@@ -13,9 +13,11 @@ build-docker:
 
   script:
   - docker build -t sendmessages . 
+  - docker tag sendmessages mvinnicius1312/sendmessages:latest
+  - docker push mvinnicius1312/sendmessages:latest
 
   stage: build
   tags: 
     - docker-runner
   script:
-  - echo "Teste"
+  - echo "Build criada"
