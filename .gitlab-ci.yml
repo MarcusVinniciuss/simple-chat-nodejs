@@ -22,7 +22,7 @@ build-docker:
 deploy-app:
   stage: deploy
   tags:
-    - docker-runner
+    - docker-run
   before_script:
     - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
