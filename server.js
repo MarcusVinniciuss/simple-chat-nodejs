@@ -1,41 +1,25 @@
-var express = require('express');
-var bodyParser = require('body-parser')
-var app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var mongoose = require('mongoose');
+let express = require('express');
+let bodyParser = require('body-parser')
+let app = express();
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
+let cors = require('cors')
+let mongoose = require('mongoose');
 
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 
-
-app.use(function (req, res, next) {
-
-  // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.setHeader('Access-Control-Allow-Origin', 'http://15.228.185.173:3000/');
-  // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-  // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
-
-  // Pass to next layer of middleware
-  next();
-});
+app.use(cors())
 
 
-var Message = mongoose.model('Message',{
+
+let Message = mongoose.model('Message',{
   name : String,
   message : String
 })
 
-var dbUrl = 'mongodb+srv://mvinnicius:mvinnicius@cluster0.2ngvf.mongodb.net/SendMessage?retryWrites=true&w=majority'
+let dbUrl = 'mongodb+srv://mvinnicius:mvinnicius@cluster0.2ngvf.mongodb.net/SendMessage?retryWrites=true&w=majority'
 
 app.get('/messages', (req, res) => {
   Message.find({},(err, messages)=> {
@@ -45,7 +29,7 @@ app.get('/messages', (req, res) => {
 
 
 app.get('/messages/:user', (req, res) => {
-  var user = req.params.user
+  let user = req.params.user
   Message.find({name: user},(err, messages)=> {
     res.send(messages);
   })
@@ -54,12 +38,12 @@ app.get('/messages/:user', (req, res) => {
 
 app.post('/messages', async (req, res) => {
   try{
-    var message = new Message(req.body);
+    let message = new Message(req.body);
 
-    var savedMessage = await message.save()
+    let savedMessage = await message.save()
       console.log('saved');
 
-    var censored = await Message.findOne({message:'badword'});
+    let censored = await Message.findOne({message:'badword'});
       if(censored)
         await Message.remove({_id: censored.id})
       else
@@ -86,6 +70,6 @@ mongoose.connect(dbUrl ,{useMongoClient : true} ,(err) => {
   console.log('mongodb connected',err);
 })
 
-var server = http.listen(3000, () => {
+let server = http.listen(3000, () => {
   console.log('server is running on port', server.address().port);
 });

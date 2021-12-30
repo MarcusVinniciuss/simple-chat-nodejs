@@ -6,7 +6,7 @@ stages:
 
 #build-docker:
 #  tags: 
-#   - docker-runner
+#   - docker-run
 #  services:
 #  - docker:dind
 #
@@ -22,7 +22,7 @@ stages:
 deploy-app:
   stage: deploy
   tags:
-    - ezops
+    - docker-run
   script:
     #- 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
     - eval $(ssh-agent -s)
