@@ -7,8 +7,8 @@ stages:
 build-docker:
   tags: 
    - runner-dind
-  services:
-  - docker:dind
+  #services:
+  #- docker:dind
 
   before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
