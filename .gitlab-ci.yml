@@ -30,11 +30,11 @@ deploy-app:
   before_script:
     #- 'command -v ssh-agent >/dev/null || ( apt update -y && apt install openssh-client -y )'
     - eval $(ssh-agent -s)
-    - echo "$STAGING_PRIVATE_KEY" |  tr -d '\r' | ssh-add -
+    - ssh-add <(echo "$STAGING_PRIVATE_KEY")
     - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - ssh -p22 ubuntu@18.231.184.13
+    - ssh -p22 ubuntu@18.231.184.13 "pwd"
     - echo "OK!"
   only:
     - master
