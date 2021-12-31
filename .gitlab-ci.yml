@@ -6,7 +6,7 @@ stages:
 
 build-docker:
   tags: 
-   - docker-runner
+   - runner-dind
   services:
   - docker:dind
 
@@ -22,7 +22,7 @@ build-docker:
 deploy-app:
   stage: deploy
   tags:
-    - docker-run
+    - runner-dind
   before_script:
     #- 'command -v ssh-agent >/dev/null || ( apt update -y && apt install openssh-client -y )'
     - eval $(ssh-agent -s)
@@ -30,7 +30,7 @@ deploy-app:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - ssh -p22 ubuntu@52.67.138.249 "pwd"
+    - ssh -p22 ubuntu@172.31.15.183 "pwd"
     - echo "OK!"
   only:
     - master
