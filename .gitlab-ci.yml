@@ -1,4 +1,4 @@
-image: docker:19.03.0
+image: docker:stable
 
 stages:
 - build
@@ -9,6 +9,10 @@ build-docker:
    - runner-dind
   services:
    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
 
   before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD
