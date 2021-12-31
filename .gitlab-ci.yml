@@ -34,7 +34,7 @@ deploy-app:
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
   script:
-    - ssh -p22 ubuntu@172.31.15.183 "pwd"
+    - ssh -p22 ubuntu@18.231.184.13
     - echo "OK!"
   only:
     - master
