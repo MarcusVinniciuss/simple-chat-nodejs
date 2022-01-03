@@ -19,6 +19,7 @@ build-docker:
   
   stage: build
   script:
+  - npm install
   - docker build -t sendmessages . 
   - docker tag sendmessages $CI_REGISTRY_USER/sendmessages:latest
   - docker push $CI_REGISTRY_USER/sendmessages:latest

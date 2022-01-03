@@ -10,20 +10,21 @@ app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}))
 
-app.use(cors())
-
-app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
-});
-
 let Message = mongoose.model('Message',{
   name : String,
   message : String
 })
 
 let dbUrl = 'mongodb+srv://mvinnicius:mvinnicius@cluster0.2ngvf.mongodb.net/SendMessage?retryWrites=true&w=majority'
+
+app.use(cors())
+
+app.all("/messages/*", function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Cache-Control, Pragma, Origin, Authorization, Content-Type, X-Requested-With");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
+  return next();
+});
 
 app.get('/messages', (req, res) => {
   Message.find({},(err, messages)=> {
