@@ -53,6 +53,7 @@ deploy-app:
   script:
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker login"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker pull mvinnicius1312/sendmessages:1.0.3"
+    - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker stop $(docker ps -q)"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker run -d -p 3000:3000 mvinnicius1312/sendmessages:1.0.3"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker ps"
     - echo "OK!"
