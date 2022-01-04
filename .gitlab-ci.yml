@@ -1,6 +1,5 @@
 stages:
 - build
-- test
 - deploy
 
 cache: 
@@ -42,7 +41,7 @@ deploy-app:
   stage: deploy
   tags:
     - runner-dind
-  #needs: [build-docker] 
+  needs: [build-docker] 
   before_script:
     - eval $(ssh-agent -s)
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
