@@ -52,6 +52,7 @@ deploy-app:
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker login"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker pull $CI_REGISTRY_USER/$PROJECT_NAME:$PROJECT_TAG"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker stop $PROJECT_NAME"
+    - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker rm $PROJECT_NAME"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker run --name=$PROJECT_NAME --restart=always -d -p 3000:3000 $CI_REGISTRY_USER/$PROJECT_NAME:$PROJECT_TAG"
     - ssh -o StrictHostKeyChecking=no $DEPLOY_HOST "docker ps"
     - echo "OK!"
