@@ -1,0 +1,4 @@
+jobs:
+  job1:
+    steps:
+    - run: echo "teste ok"
